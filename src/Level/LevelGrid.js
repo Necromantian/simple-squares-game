@@ -5,12 +5,8 @@ import './LevelGrid.css';
 import Field from './Field';
 class LevelGrid extends Component {
 
-    constructor() {
-        super();
-    }
-
     getWidth(){
-        return this.props.cols * (this.props.fieldSize + 2);
+        return this.props.cols * (Number(this.props.fieldSize) + 2);
     }
 
     updateGrid() {
@@ -26,7 +22,6 @@ class LevelGrid extends Component {
         return grid;
     }
 
-
     render() {
         return (
             <div className='whole-grid' style={{ width: this.getWidth(), lineHeight: '0', margin: 'auto' }}>
@@ -34,12 +29,6 @@ class LevelGrid extends Component {
             </div>
         )
     }
-    /*render() {
-        return (
-        <div className='whole-grid'>
-            <Grid cols={this.props.cols} rows={this.props.rows} fieldSize={this.props.fieldSize}/>
-        </div>);
-    }*/
 
 }
 

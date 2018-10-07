@@ -42,11 +42,12 @@ class Hud extends Component {
                 this.setState({rows: event.target.value})
             break;
 
-            case 'fieldSize':
+            case 'size':
                 this.setState({fieldSize: event.target.value})
             break;
+
+            default: break;
         }
-        //this.setState({value: event.target.value.toUpperCase()});
     }
 
     render() {
@@ -61,7 +62,7 @@ class Hud extends Component {
             <div className='settings-container'>
                 <form className={classes.container}>     
                     <TextField className={classes.textField} margin="normal" type="number" label="Liczba wierszy" name="rows" value={this.state.rows} onChange={this.handleChange.bind(this)} />   
-                    <TextField className={classes.textField} margin="normal" className='single-input' type="number" label="Liczba kolumn" name="cols" value={this.state.cols} onChange={this.handleChange.bind(this)} />              
+                    <TextField className={classes.textField} margin="normal" type="number" label="Liczba kolumn" name="cols" value={this.state.cols} onChange={this.handleChange.bind(this)} />              
                     <Button className={classes.button+ " hud-button"} variant="outlined" onClick={()=>this.props.setDimension(this.state.rows,this.state.cols)}>
                         Ustaw rozmiar planszy
                     </Button>

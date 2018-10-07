@@ -23,8 +23,8 @@ const Dimentions = {
 };
 
 const GameStatus = Object.freeze({
-    CONTINUE:   Symbol("continue"),
-    WIN:  Symbol("win"),
+    CONTINUE: Symbol("continue"),
+    WIN: Symbol("win"),
     LOSE: Symbol("lose")
 });
 
@@ -58,7 +58,6 @@ class Game extends Component {
         evil: () => {
             let tempObjects = [...this.state.gameObjects];
             let evils = [];
-            let randomEvil;
 
             for (let i = 0; i < tempObjects.length; i++) {
                 for (let j = 0; j < tempObjects[i].length; j++) {
@@ -78,7 +77,8 @@ class Game extends Component {
         this.setState({
             cols,
             rows
-        })
+        });
+        this.setState({ gameObjects: this.getEmptyGameObjects(cols, rows) });
     }
 
     setFieldSize(fieldSize) {
@@ -106,25 +106,27 @@ class Game extends Component {
             case 0:
                 if (randomEvil.x + 1 < this.state.cols && tempObjects[randomEvil.x + 1][randomEvil.y] === null) {
                     return { x: randomEvil.x + 1, y: randomEvil.y }
-                }
+                };
+                break;
             case 1:
                 if (randomEvil.y + 1 < this.state.rows && tempObjects[randomEvil.x][randomEvil.y + 1] === null) {
                     return { x: randomEvil.x, y: randomEvil.y + 1 }
-                    break;
                 }
+                break;
             case 2:
                 if (randomEvil.x - 1 >= 0 && tempObjects[randomEvil.x - 1][randomEvil.y] === null) {
                     return { x: randomEvil.x - 1, y: randomEvil.y }
-                    break;
                 }
+                break;
             case 3:
                 if (randomEvil.y - 1 >= 0 && tempObjects[randomEvil.x][randomEvil.y - 1] === null) {
                     return { x: randomEvil.x, y: randomEvil.y - 1 }
-                    break;
                 }
+                break;
             default:
                 return this.randomNewEvil();
         }
+        return this.randomNewEvil();
     }
 
     checkGameStatus() {
@@ -147,21 +149,20 @@ class Game extends Component {
         return GameStatus.WIN;
     }
 
-    gameOver(status){
-        if(status === GameStatus.WIN){
+    gameOver(status) {
+        if (status === GameStatus.WIN) {
             alert('Wygrałeś ziom!');
             this.resetGame();
         }
-        else if (status === GameStatus.LOSE){
+        else if (status === GameStatus.LOSE) {
             alert('Przegrałeś ziom!');
             this.resetGame();
         }
     }
     generateEvil() {
-        this.gameOver(GameStatus.LOSE);
         let tempObjects = [...this.state.gameObjects];
         if (tempObjects.some(row => row.includes("evil")) === true) { // czy istnieje zlo?
-            switch(this.checkGameStatus()){
+            switch (this.checkGameStatus()) {
                 case GameStatus.WIN:
                     this.gameOver(GameStatus.WIN);
                     return;
@@ -184,10 +185,10 @@ class Game extends Component {
 
     startNewGame() {
         //this.resetGame();
-        this.evilInterval = setInterval(this.generateEvil.bind(this),300);
+        this.evilInterval = setInterval(this.generateEvil.bind(this), 400);
     }
 
-    resetGame(){
+    resetGame() {
         clearInterval(this.evilInterval);
         this.setState({ gameObjects: this.getEmptyGameObjects(this.state.cols, this.state.rows) });
     }
