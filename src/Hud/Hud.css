@@ -1,0 +1,26 @@
+.single-form{
+    margin:20px;
+}
+
+.single-input{
+    margin: 5px;
+}
+.start-button-container{
+    margin: 10px;
+}
+.start-button{
+    display: inline-table !important;
+    left: 50%;
+}
+
+.hud-container{
+    background-color: white;
+}
+
+.settings-container{
+    
+}
+.hud-button{
+    height: 20px !important;
+    margin-top: auto !important;
+}
